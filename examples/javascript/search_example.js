@@ -298,8 +298,9 @@ async function main() {
   await listByStatus('Prohibited', 1);
 
   // Uncomment below for PRO/ULTRA tier examples:
-  // await searchPartial('acid', 'inci');
-  // await getIngredient('KC-00001');
+  // console.log('\n--- PRO/ULTRA Tier Examples ---');
+  // await searchPartial('extract', 'inci');
+  // await getIngredient(9);
 
   console.log('\n✅ Examples completed!');
 }
