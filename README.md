@@ -1,4 +1,4 @@
-# korean-cosmetic-ingredients-api
+# Korean-cosmetic-ingredients-api
 REST API for Korean Cosmetic Ingredients (INCI, MFDS, KCIA data)
 
 # 🇰🇷 K-Beauty Cosmetic Ingredients API
@@ -310,7 +310,7 @@ This API provides data for **reference purposes only**. It is not legal or regul
 
 ## 🏷️ Keywords
 
-`k-beauty` `korean-cosmetics` `cosmetic-ingredients` `inci` `cas-number` `skincare` `beauty-api` `ingredient-database` `cosmetic-safety` `kcia` `mfds` `korean-skincare` `beauty-tech` `cosmetic-compliance` `ingredient-lookup` `cosmetic-formulation` `regulatory-data`
+`k-beauty` `Korean-cosmetics` `cosmetic-ingredients` `inci` `cas-number` `skincare` `beauty-api` `ingredient-database` `cosmetic-safety` `kcia` `mfds` `Korean-skincare` `beauty-tech` `cosmetic-compliance` `ingredient-lookup` `cosmetic-formulation` `regulatory-data`
 
 ---
 
