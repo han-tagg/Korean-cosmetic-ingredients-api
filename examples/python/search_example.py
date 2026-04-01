@@ -270,7 +270,8 @@ if __name__ == "__main__":
     list_by_status("Prohibited", page=1)
     
     # Uncomment below for PRO/ULTRA tier examples:
-    # search_partial("acid", field="inci")
-    # get_ingredient("KC-00001")
+    # print("\n--- PRO/ULTRA Tier Examples ---")
+    # search_partial("extract", field="inci")
+    # get_ingredient(9)
     
     print("\n✅ Examples completed!")
