@@ -127,10 +127,10 @@ echo ""
 # Example 7: Partial Search (PRO/ULTRA only)
 # ============================================================
 
-echo "🔍 Partial Search: 'acid' in INCI field (PRO/ULTRA only)"
+echo "🔍 Partial Search: 'extract' in INCI field (PRO/ULTRA only)"
 echo "============================================================"
 
-curl -s -X GET "${BASE_URL}/v1/ingredient/search?q=acid&field=inci" \
+curl -s -X GET "${BASE_URL}/v1/ingredient/search?q=extract&field=inci" \
   -H "X-RapidAPI-Key: ${API_KEY}" \
   -H "X-RapidAPI-Host: ${HOST}" | python3 -m json.tool
 
