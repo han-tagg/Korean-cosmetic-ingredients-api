@@ -3,8 +3,7 @@
  * ========================================================
  * 
  * Prerequisites:
- *     npm install node-fetch (for Node.js < 18)
- *     or use native fetch in Node.js 18+
+ *     Node.js 18+ (native fetch support)
  * 
  * Usage:
  *     1. Replace 'YOUR_API_KEY' with your RapidAPI key
@@ -82,16 +81,10 @@ function printResults(data, title = 'Results') {
 // Example 1: Search by INCI Name
 // ============================================================
 
-/**
- * Search ingredients by INCI name (starts with match).
- * Available for all tiers.
- */
 async function searchByInci(query) {
   console.log(`\n🔍 Searching INCI name: '${query}'`);
-  
   const data = await makeRequest('/v1/ingredient/inci', { q: query });
   printResults(data, `INCI Search: ${query}`);
-  
   return data;
 }
 
@@ -100,16 +93,10 @@ async function searchByInci(query) {
 // Example 2: Search by CAS Number
 // ============================================================
 
-/**
- * Search ingredients by CAS registry number.
- * Available for all tiers.
- */
 async function searchByCas(query) {
   console.log(`\n🔍 Searching CAS number: '${query}'`);
-  
   const data = await makeRequest('/v1/ingredient/cas', { q: query });
   printResults(data, `CAS Search: ${query}`);
-  
   return data;
 }
 
@@ -118,37 +105,22 @@ async function searchByCas(query) {
 // Example 3: Search by Korean Name
 // ============================================================
 
-/**
- * Search ingredients by Korean name.
- * Available for all tiers.
- */
 async function searchByKorean(query) {
   console.log(`\n🔍 Searching Korean name: '${query}'`);
-  
   const data = await makeRequest('/v1/ingredient/kr', { q: query });
   printResults(data, `Korean Search: ${query}`);
-  
   return data;
 }
 
 
 // ============================================================
-// Example 4: Partial Text Search (PRO/ULTRA only)
+// Example 4: Partial Text Search (PRO/ULTRA/MEGA only)
 // ============================================================
 
-/**
- * Search ingredients containing query anywhere.
- * Requires PRO or ULTRA tier.
- * 
- * @param {string} query - Search text (min 3 characters)
- * @param {string} field - 'inci', 'kr', 'cas', or 'all'
- */
 async function searchPartial(query, field = 'all') {
   console.log(`\n🔍 Partial search: '${query}' in field: '${field}'`);
-  
   const data = await makeRequest('/v1/ingredient/search', { q: query, field: field });
   printResults(data, `Partial Search: ${query}`);
-  
   return data;
 }
 
@@ -157,15 +129,8 @@ async function searchPartial(query, field = 'all') {
 // Example 5: List by Regulatory Status
 // ============================================================
 
-/**
- * List ingredients by regulatory status.
- * 
- * @param {string} status - 'Prohibited', 'Restricted', 'Restricted / Prohibited', or 'Not Listed'
- * @param {number} page - Page number
- */
 async function listByStatus(status, page = 1) {
   console.log(`\n📋 Listing status: '${status}' (page ${page})`);
-  
   const data = await makeRequest('/v1/ingredient/status', { s: status, page: page });
 
   if (data && data.success) {
@@ -174,12 +139,10 @@ async function listByStatus(status, page = 1) {
     console.log('='.repeat(60));
     console.log(`Total items: ${data.total_items || 0}`);
     console.log(`Showing: ${data.count || 0} items\n`);
-
     (data.data || []).forEach(item => {
       console.log(`  • ${item.inci_name || 'N/A'} (${item.kr_name || 'N/A'})`);
     });
   }
-
   return data;
 }
 
@@ -188,14 +151,8 @@ async function listByStatus(status, page = 1) {
 // Example 6: Get Single Ingredient
 // ============================================================
 
-/**
- * Get detailed info for a specific ingredient.
- * 
- * @param {string} code - Ingredient code (e.g., 'KC-00001')
- */
 async function getIngredient(code) {
-  console.log(`\n📄 Getting ingredient: '${code}'`);
-  
+  console.log(`\n📄 Getting ingredient: ${code}`);
   const data = await makeRequest(`/v1/ingredient/${code}`);
 
   if (data && data.success) {
@@ -210,7 +167,6 @@ async function getIngredient(code) {
     console.log(`  Purposes: ${item.purposes || 'N/A'}`);
     console.log(`  Status: ${item.regulation_status || 'N/A'}`);
   }
-
   return data;
 }
 
@@ -219,12 +175,8 @@ async function getIngredient(code) {
 // Example 7: Get Database Statistics
 // ============================================================
 
-/**
- * Get database statistics.
- */
 async function getStats() {
   console.log('\n📊 Getting database statistics...');
-  
   const data = await makeRequest('/v1/stats');
 
   if (data && data.success) {
@@ -234,12 +186,10 @@ async function getStats() {
     console.log('='.repeat(60));
     console.log(`  Total Ingredients: ${(stats.total_ingredients || 0).toLocaleString()}`);
     console.log('\n  By Regulatory Status:');
-
     Object.entries(stats.by_status || {}).forEach(([status, count]) => {
       console.log(`    • ${status}: ${count.toLocaleString()}`);
     });
   }
-
   return data;
 }
 
@@ -248,19 +198,61 @@ async function getStats() {
 // Example 8: Health Check
 // ============================================================
 
-/**
- * Check if API is operational.
- */
 async function healthCheck() {
   console.log('\n❤️ Checking API health...');
-  
   const data = await makeRequest('/health');
 
   if (data) {
     console.log(`  Status: ${data.status || 'unknown'}`);
     console.log(`  Version: ${data.version || 'unknown'}`);
   }
+  return data;
+}
 
+
+// ============================================================
+// Example 9: Get Ingredient Regulations (PRO/ULTRA/MEGA)
+// ============================================================
+
+/**
+ * Get country-specific regulation data for an ingredient.
+ * Requires PRO, ULTRA, or MEGA tier.
+ * 
+ * Country access by tier:
+ *   PRO:   한국, EU
+ *   ULTRA: + 중국, 미국, 일본, 아세안
+ *   MEGA:  All 10 countries
+ * 
+ * @param {number} code - Ingredient code (e.g., 9)
+ * @param {string|null} country - Optional country filter (e.g., 'EU', '한국')
+ */
+async function getRegulations(code, country = null) {
+  const label = country ? ` (country: ${country})` : '';
+  console.log(`\n🌍 Getting regulations for ingredient ${code}${label}`);
+  
+  const params = country ? { country } : {};
+  const data = await makeRequest(`/v1/ingredient/${code}/regulations`, params);
+
+  if (data && data.success) {
+    const ingredient = data.ingredient || {};
+    console.log('\n' + '='.repeat(60));
+    console.log(` Regulations: ${ingredient.inci_name || 'N/A'} (${ingredient.kr_name || 'N/A'})`);
+    console.log('='.repeat(60));
+    console.log(`  Available countries: ${JSON.stringify(data.available_countries)}`);
+    console.log(`  Regulation records: ${data.count || 0}\n`);
+
+    (data.data || []).forEach(reg => {
+      console.log(`  Country: ${reg.country || 'N/A'}`);
+      console.log(`  Type: ${reg.regulate_type || 'N/A'}`);
+      console.log(`  Name: ${reg.notice_ingr_name || 'N/A'}`);
+      if (reg.limit_condition) {
+        console.log(`  Conditions: ${reg.limit_condition.substring(0, 100)}...`);
+      }
+      console.log('-'.repeat(40));
+    });
+  } else {
+    console.log('No regulation data found (PRO or higher tier required).');
+  }
   return data;
 }
 
@@ -273,10 +265,10 @@ async function main() {
   console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║  K-Beauty Cosmetic Ingredients API - JavaScript Examples  ║
+║  API Version: 3.0.0                                       ║
 ╚═══════════════════════════════════════════════════════════╝
   `);
 
-  // Check API key
   if (API_KEY === 'YOUR_API_KEY') {
     console.log("⚠️  Please replace 'YOUR_API_KEY' with your actual RapidAPI key!");
     console.log('   Get your key at: https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients');
@@ -284,27 +276,25 @@ async function main() {
     process.exit(1);
   }
 
-  // Run examples
+  // All tiers
   await healthCheck();
   await getStats();
-
   await searchByInci('retinol');
   await searchByInci('niacin');
-
   await searchByCas('68-26-8');
-
   await searchByKorean('레티놀');
-
   await listByStatus('Prohibited', 1);
+  await getIngredient(9);
 
-  // Uncomment below for PRO/ULTRA tier examples:
-  // console.log('\n--- PRO/ULTRA Tier Examples ---');
+  // PRO/ULTRA/MEGA tier examples:
+  // Uncomment below if you have PRO or higher tier
+  
   // await searchPartial('extract', 'inci');
-  // await getIngredient(9);
+  // await getRegulations(9);                   // All available countries
+  // await getRegulations(9, 'EU');             // EU regulations only
+  // await getRegulations(9, '한국');            // Korea regulations only
 
   console.log('\n✅ Examples completed!');
 }
 
-
-// Run main function
 main().catch(console.error);
