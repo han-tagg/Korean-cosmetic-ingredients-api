@@ -2,6 +2,7 @@
 
 # ============================================================
 # K-Beauty Cosmetic Ingredients API - cURL Examples
+# API Version: 3.0.0
 # ============================================================
 #
 # Prerequisites:
@@ -29,6 +30,7 @@ fi
 
 echo "╔═══════════════════════════════════════════════════════════╗"
 echo "║    K-Beauty Cosmetic Ingredients API - cURL Examples      ║"
+echo "║    API Version: 3.0.0                                     ║"
 echo "╚═══════════════════════════════════════════════════════════╝"
 echo ""
 
@@ -124,13 +126,58 @@ echo ""
 
 
 # ============================================================
-# Example 7: Partial Search (PRO/ULTRA only)
+# Example 7: Get Single Ingredient
 # ============================================================
 
-echo "🔍 Partial Search: 'extract' in INCI field (PRO/ULTRA only)"
+echo "📄 Get Single Ingredient (code: 9 - Linalool)"
+echo "============================================================"
+
+curl -s -X GET "${BASE_URL}/v1/ingredient/9" \
+  -H "X-RapidAPI-Key: ${API_KEY}" \
+  -H "X-RapidAPI-Host: ${HOST}" | python3 -m json.tool
+
+echo ""
+echo ""
+
+
+# ============================================================
+# Example 8: Partial Search (PRO/ULTRA/MEGA only)
+# ============================================================
+
+echo "🔍 Partial Search: 'extract' in INCI field (PRO/ULTRA/MEGA only)"
 echo "============================================================"
 
 curl -s -X GET "${BASE_URL}/v1/ingredient/search?q=extract&field=inci" \
+  -H "X-RapidAPI-Key: ${API_KEY}" \
+  -H "X-RapidAPI-Host: ${HOST}" | python3 -m json.tool
+
+echo ""
+echo ""
+
+
+# ============================================================
+# Example 9: Get Ingredient Regulations (PRO/ULTRA/MEGA only)
+# ============================================================
+
+echo "🌍 Get Regulations for Linalool - All countries (PRO/ULTRA/MEGA only)"
+echo "============================================================"
+
+curl -s -X GET "${BASE_URL}/v1/ingredient/9/regulations" \
+  -H "X-RapidAPI-Key: ${API_KEY}" \
+  -H "X-RapidAPI-Host: ${HOST}" | python3 -m json.tool
+
+echo ""
+echo ""
+
+
+# ============================================================
+# Example 10: Get Regulations - Filtered by Country
+# ============================================================
+
+echo "🌍 Get EU Regulations for Linalool (PRO/ULTRA/MEGA only)"
+echo "============================================================"
+
+curl -s -X GET "${BASE_URL}/v1/ingredient/9/regulations?country=EU" \
   -H "X-RapidAPI-Key: ${API_KEY}" \
   -H "X-RapidAPI-Host: ${HOST}" | python3 -m json.tool
 
@@ -147,17 +194,17 @@ echo "📝 Quick Reference - Copy & Paste Commands"
 echo "============================================================"
 echo ""
 echo "# Search by INCI name"
-echo "curl -X GET '${BASE_URL}/v1/ingredient/inci?q=niacinamide' \\"
+echo "curl '${BASE_URL}/v1/ingredient/inci?q=niacinamide' \\"
 echo "  -H 'X-RapidAPI-Key: YOUR_API_KEY' \\"
 echo "  -H 'X-RapidAPI-Host: ${HOST}'"
 echo ""
 echo "# Search by CAS number"
-echo "curl -X GET '${BASE_URL}/v1/ingredient/cas?q=98-92-0' \\"
+echo "curl '${BASE_URL}/v1/ingredient/cas?q=98-92-0' \\"
 echo "  -H 'X-RapidAPI-Key: YOUR_API_KEY' \\"
 echo "  -H 'X-RapidAPI-Host: ${HOST}'"
 echo ""
-echo "# List restricted ingredients"
-echo "curl -X GET '${BASE_URL}/v1/ingredient/status?s=Restricted&page=1' \\"
+echo "# Get ingredient regulations (PRO+)"
+echo "curl '${BASE_URL}/v1/ingredient/9/regulations?country=EU' \\"
 echo "  -H 'X-RapidAPI-Key: YOUR_API_KEY' \\"
 echo "  -H 'X-RapidAPI-Host: ${HOST}'"
 echo ""
