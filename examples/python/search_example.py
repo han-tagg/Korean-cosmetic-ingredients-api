@@ -118,13 +118,13 @@ def search_by_korean(query: str):
 
 
 # ============================================================
-# Example 4: Partial Text Search (PRO/ULTRA only)
+# Example 4: Partial Text Search (PRO/ULTRA/MEGA only)
 # ============================================================
 
 def search_partial(query: str, field: str = "all"):
     """
     Search ingredients containing query anywhere.
-    Requires PRO or ULTRA tier.
+    Requires PRO, ULTRA, or MEGA tier.
     
     Args:
         query: Search text (min 3 characters)
@@ -171,14 +171,14 @@ def list_by_status(status: str, page: int = 1):
 # Example 6: Get Single Ingredient
 # ============================================================
 
-def get_ingredient(code: str):
+def get_ingredient(code: int):
     """
     Get detailed info for a specific ingredient.
     
     Args:
-        code: Ingredient code (e.g., 'KC-00001')
+        code: Ingredient code (integer, e.g., 9)
     """
-    print(f"\n📄 Getting ingredient: '{code}'")
+    print(f"\n📄 Getting ingredient: {code}")
     
     data = make_request(f"/v1/ingredient/{code}")
     
@@ -239,6 +239,51 @@ def health_check():
 
 
 # ============================================================
+# Example 9: Get Ingredient Regulations (PRO/ULTRA/MEGA)
+# ============================================================
+
+def get_regulations(code: int, country: str = None):
+    """
+    Get country-specific regulation data for an ingredient.
+    Requires PRO, ULTRA, or MEGA tier.
+    
+    Country access by tier:
+        PRO:   한국, EU
+        ULTRA: + 중국, 미국, 일본, 아세안
+        MEGA:  All 10 countries
+    
+    Args:
+        code: Ingredient code (integer, e.g., 9)
+        country: Optional country filter (e.g., 'EU', '한국', '중국')
+    """
+    print(f"\n🌍 Getting regulations for ingredient {code}" + 
+          (f" (country: {country})" if country else ""))
+    
+    params = {"country": country} if country else {}
+    data = make_request(f"/v1/ingredient/{code}/regulations", params)
+    
+    if data and data.get("success"):
+        ingredient = data.get("ingredient", {})
+        print(f"\n{'='*60}")
+        print(f" Regulations: {ingredient.get('inci_name', 'N/A')} ({ingredient.get('kr_name', 'N/A')})")
+        print(f"{'='*60}")
+        print(f"  Available countries: {data.get('available_countries', 'N/A')}")
+        print(f"  Regulation records: {data.get('count', 0)}\n")
+        
+        for reg in data.get("data", []):
+            print(f"  Country: {reg.get('country', 'N/A')}")
+            print(f"  Type: {reg.get('regulate_type', 'N/A')}")
+            print(f"  Name: {reg.get('notice_ingr_name', 'N/A')}")
+            if reg.get('limit_condition'):
+                print(f"  Conditions: {reg['limit_condition'][:100]}...")
+            print("-" * 40)
+    else:
+        print("No regulation data found (PRO or higher tier required).")
+    
+    return data
+
+
+# ============================================================
 # Main - Run Examples
 # ============================================================
 
@@ -246,6 +291,7 @@ if __name__ == "__main__":
     print("""
 ╔═══════════════════════════════════════════════════════════╗
 ║   K-Beauty Cosmetic Ingredients API - Python Examples     ║
+║   API Version: 3.0.0                                      ║
 ╚═══════════════════════════════════════════════════════════╝
     """)
     
@@ -256,7 +302,7 @@ if __name__ == "__main__":
         print()
         exit(1)
     
-    # Run examples
+    # Run examples (All tiers)
     health_check()
     get_stats()
     
@@ -269,9 +315,14 @@ if __name__ == "__main__":
     
     list_by_status("Prohibited", page=1)
     
-    # Uncomment below for PRO/ULTRA tier examples:
-    # print("\n--- PRO/ULTRA Tier Examples ---")
+    get_ingredient(9)
+    
+    # PRO/ULTRA/MEGA tier examples:
+    # Uncomment below if you have PRO or higher tier
+    
     # search_partial("extract", field="inci")
-    # get_ingredient(9)
+    # get_regulations(9)                    # All available countries
+    # get_regulations(9, country="EU")      # EU regulations only
+    # get_regulations(9, country="한국")     # Korea regulations only
     
     print("\n✅ Examples completed!")
