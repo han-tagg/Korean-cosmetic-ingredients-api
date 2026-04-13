@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Beauty Cosmetic Ingredients API — Global Regulation Database for 10 Countries</title>
+    <meta name="description" content="Access 21,796 Korean cosmetic ingredients with regulatory compliance data across 10 countries. Compare ingredient regulations for Korea, EU, China, Japan, ASEAN, and more via a single API.">
+    <meta name="keywords" content="cosmetic ingredients API, K-beauty regulation, cosmetic compliance, INCI database, CAS number lookup, MFDS Korea, EU CosIng, cosmetic ingredient regulation">
+    <link rel="canonical" href="https://han-tagg.github.io/kbeauty-api/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="K-Beauty Cosmetic Ingredients API">
+    <meta property="og:description" content="21,796 ingredients. 10 countries. 30,960 regulation records. One API.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://han-tagg.github.io/kbeauty-api/">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebAPI",
+        "name": "K-Beauty Cosmetic Ingredients API",
+        "description": "A database of 21,796 Korean cosmetic ingredients with regulatory compliance data across 10 countries including Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, and USA.",
+        "url": "https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients",
+        "provider": {
+            "@type": "Organization",
+            "name": "TAGG"
+        },
+        "documentation": "https://github.com/han-tagg/Korean-cosmetic-ingredients-api"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Global Cosmetic Ingredient Regulation Database",
+        "description": "Regulatory compliance data for 21,796 cosmetic ingredients across 10 countries, sourced from MFDS (Korea FDA) and KCIA.",
+        "url": "https://han-tagg.github.io/kbeauty-api/",
+        "keywords": ["cosmetic regulation", "INCI", "CAS number", "K-beauty", "MFDS", "EU CosIng"],
+        "creator": {"@type": "Organization", "name": "TAGG"},
+        "temporalCoverage": "2026",
+        "spatialCoverage": "Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, USA",
+        "variableMeasured": "cosmetic ingredient regulatory status"
+    }
+    </script>
+
+    <style>
+        :root {
+            --ink: #1a1a2e;
+            --paper: #fafaf8;
+            --accent: #2d6a4f;
+            --muted: #6b7280;
+            --border: #e5e5e0;
+            --code-bg: #f3f3ee;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--ink);
+            background: var(--paper);
+            line-height: 1.7;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin: 36px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+        p { margin-bottom: 16px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 20px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.92rem;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            font-weight: bold;
+            background: var(--code-bg);
+        }
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.88rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        pre {
+            background: var(--ink);
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 16px 0;
+        }
+        .articles { list-style: none; }
+        .articles li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .articles li:last-child { border-bottom: none; }
+        .articles a { font-weight: bold; }
+        .articles .desc { color: var(--muted); font-size: 0.9rem; }
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        nav {
+            margin: 20px 0 30px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        nav a { margin-right: 20px; }
+        @media (max-width: 500px) {
+            .stats { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>K-Beauty Cosmetic Ingredients API</h1>
+<p class="subtitle">Global cosmetic ingredient regulation database — 10 countries, one API call.</p>
+
+<nav>
+    <a href="./">Home</a>
+    <a href="./regulations/salicylic-acid.html">Salicylic Acid</a>
+    <a href="./regulations/parabens.html">Parabens</a>
+    <a href="./regulations/triclosan.html">Triclosan</a>
+    <a href="./regulations/linalool.html">Linalool</a>
+    <a href="./regulations/country-regulations.html">By Country</a>
+    <a href="./k-beauty-regulations-vs-eu-cosmetics.html">Korea vs EU</a>
+    <a href="./faq.html">FAQ</a>
+</nav>
+
+<div class="stats">
+    <div class="stat-box">
+        <span class="stat-num">21,796</span>
+        <span class="stat-label">Ingredients</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-num">30,960</span>
+        <span class="stat-label">Regulation Records</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Countries</span>
+    </div>
+</div>
+
+<h2>What is this?</h2>
+<p>A REST API that provides Korean cosmetic ingredient data with regulatory compliance information across 10 countries. Sourced from MFDS (Korea's Ministry of Food and Drug Safety) and KCIA (Korea Cosmetic Industry Association). All data translated to English.</p>
+<p>If you're formulating cosmetics for global markets or doing regulatory compliance work, this saves you from digging through government sites in languages you don't read.</p>
+
+<h2>Countries Covered</h2>
+<table>
+    <tr><th>Country / Region</th><th>Data Type</th></tr>
+    <tr><td>🇰🇷 Korea</td><td>Full ingredient database + regulations</td></tr>
+    <tr><td>🇪🇺 EU</td><td>Annex II (prohibited) + Annex III (restricted)</td></tr>
+    <tr><td>🇨🇳 China</td><td>Prohibited + restricted substances</td></tr>
+    <tr><td>🇯🇵 Japan</td><td>Restricted substances + concentration limits</td></tr>
+    <tr><td>🌏 ASEAN</td><td>Prohibited + restricted (10 member states)</td></tr>
+    <tr><td>🇨🇦 Canada</td><td>Hotlist restrictions</td></tr>
+    <tr><td>🇧🇷 Brazil</td><td>ANVISA prohibited + restricted</td></tr>
+    <tr><td>🇦🇷 Argentina</td><td>ANMAT prohibited + restricted</td></tr>
+    <tr><td>🇹🇼 Taiwan</td><td>TFDA restricted substances</td></tr>
+    <tr><td>🇺🇸 USA</td><td>FDA regulations</td></tr>
+</table>
+
+<h2>API Endpoints</h2>
+<table>
+    <tr><th>Endpoint</th><th>Description</th></tr>
+    <tr><td><code>GET /v1/stats</code></td><td>Database statistics</td></tr>
+    <tr><td><code>GET /v1/ingredient/inci?q=retinol</code></td><td>Search by INCI name</td></tr>
+    <tr><td><code>GET /v1/ingredient/cas?q=69-72-7</code></td><td>Search by CAS number</td></tr>
+    <tr><td><code>GET /v1/ingredient/{code}/regulations</code></td><td>Country-specific regulations</td></tr>
+    <tr><td><code>GET /v1/ingredient/search?q=glycerin</code></td><td>Partial text search</td></tr>
+</table>
+
+<h2>Example Response</h2>
+<pre>{
+  "success": true,
+  "count": 1,
+  "data": [{
+    "code": 5489,
+    "kr_name": "레티놀",
+    "inci_name": "Retinol",
+    "cas_numbers": "11103-57-4, 68-26-8",
+    "purposes": "Skin Conditioning Agent",
+    "regulation_status": "Restricted"
+  }]
+}</pre>
+
+<h2>Regulation Comparison Articles</h2>
+<p>Real examples from the database showing how the same ingredient is regulated differently across countries:</p>
+<ul class="articles">
+    <li>
+        <a href="./regulations/salicylic-acid.html">Salicylic Acid — 10 Countries, 10 Different Rules</a>
+        <p class="desc">Japan allows 0.2%. Korea allows 2-3%. EU goes up to 3%. Same ingredient, completely different compliance requirements.</p>
+    </li>
+    <li>
+        <a href="./regulations/parabens.html">Parabens — Banned in 5 Countries, Legal in 2</a>
+        <p class="desc">Isobutylparaben is banned in the EU, China, ASEAN, Brazil, and Argentina. Korea and Japan still allow it at 0.4%.</p>
+    </li>
+    <li>
+        <a href="./regulations/triclosan.html">Triclosan — The Antibacterial Being Phased Out Worldwide</a>
+        <p class="desc">Every country is restricting Triclosan differently, at different speeds, with different product exceptions.</p>
+    </li>
+    <li>
+        <a href="./regulations/linalool.html">Linalool — In Every Fragrance, Regulated by Almost Nobody</a>
+        <p class="desc">The EU requires allergen labeling for Linalool above 0.001%. Most other countries don't even mention it.</p>
+    </li>
+    <li>
+        <a href="./regulations/country-regulations.html">Regulation Coverage by Country — 10 Markets Compared</a>
+        <p class="desc">What data is available for each country, how regulatory approaches differ, and where the biggest gaps are.</p>
+    </li>
+    <li>
+        <a href="./k-beauty-regulations-vs-eu-cosmetics.html">Korean vs EU Cosmetic Regulations — Side by Side</a>
+        <p class="desc">Korea bans 172+ ingredients, EU bans 1,700+. But Korea is stricter on some. Full framework comparison.</p>
+    </li>
+</ul>
+
+<h2>Data Sources</h2>
+<p>All data is sourced from official government agencies and verified against the EU CosIng database (99.2% accuracy). Source data is monitored weekly and updated whenever agencies publish changes.</p>
+
+<h2>Links</h2>
+<p>
+    <a href="https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients">API on RapidAPI</a> · 
+    <a href="https://github.com/han-tagg/Korean-cosmetic-ingredients-api">GitHub</a> · 
+    <a href="https://dev.to/tagg_dev">Dev.to Blog</a>
+</p>
+
+<footer>
+    <p style="font-size:0.8rem;color:#999;margin-bottom:8px;">Regulatory reference data only. Does not constitute legal, compliance, or safety advice. Verify with official sources before making compliance decisions.</p>
+    <p>K-Beauty Cosmetic Ingredients API — Data from MFDS and KCIA</p>
+    <p><a href="https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients">RapidAPI</a> · <a href="https://github.com/han-tagg/Korean-cosmetic-ingredients-api">GitHub</a> · <a href="./faq.html">FAQ</a></p>
+</footer>
+
+</body>
+</html>

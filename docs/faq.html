@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — K-Beauty Cosmetic Ingredients API</title>
+    <meta name="description" content="Frequently asked questions about Korean cosmetic ingredient regulations, MFDS, KCIA, INCI names, and the K-Beauty Cosmetic Ingredients API.">
+    <meta name="keywords" content="Korean cosmetic regulation FAQ, MFDS cosmetic ingredients, KCIA database, INCI name search, K-beauty compliance questions">
+    <link rel="canonical" href="https://han-tagg.github.io/kbeauty-api/faq.html">
+
+    <meta property="og:title" content="FAQ — K-Beauty Cosmetic Ingredients API">
+    <meta property="og:description" content="Common questions about Korean cosmetic regulations and how to check ingredient compliance across 10 countries.">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What cosmetic ingredients are banned in Korea?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Korea's MFDS (Ministry of Food and Drug Safety) prohibits 172+ cosmetic ingredients. These include substances classified as dangerous or insufficiently tested for cosmetic use. The full list can be queried via the K-Beauty Cosmetic Ingredients API using the /v1/ingredient/status?s=Prohibited endpoint."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I check if an ingredient is allowed in Korean cosmetics?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can search by INCI name, CAS number, or Korean name using the K-Beauty Cosmetic Ingredients API. Each ingredient returns a regulation_status field showing whether it is Prohibited, Restricted, or Not Listed. For restricted ingredients, concentration limits and product-type conditions are also provided."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between MFDS and KCIA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MFDS (Ministry of Food and Drug Safety) is the Korean government regulatory agency that sets and enforces cosmetic ingredient regulations, including prohibited and restricted substance lists. KCIA (Korea Cosmetic Industry Association) maintains the cosmetic ingredient dictionary — the master list of 21,796 ingredients with INCI names, CAS numbers, purposes, and safety classifications. The K-Beauty API combines data from both sources."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do Korean cosmetic regulations compare to EU?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Korea and the EU share a similar regulatory framework but differ significantly in specific ingredient decisions. The EU bans 1,700+ substances (Annex II) compared to Korea's 172+. However, Korea has stricter age restrictions for some ingredients — for example, Salicylic Acid is prohibited for children under 13 in Korea versus under 3 in the EU. Some ingredients like Isobutylparaben are banned in the EU but allowed in Korea at 0.4%. See our detailed comparison page for more."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is an INCI name and how do I search by it?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "INCI (International Nomenclature of Cosmetic Ingredients) is the standardized naming system for cosmetic ingredients used worldwide. For example, 'Retinol' is the INCI name for Vitamin A. You can search the K-Beauty API by INCI name using GET /v1/ingredient/inci?q=retinol, which returns the ingredient's Korean name, CAS number, regulatory status, and more."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are Korean cosmetic regulations stricter than EU?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It depends on the ingredient. Korea is stricter for some — Salicylic Acid has an under-13 age restriction (EU: under 3). Korea is more permissive for others — Isobutylparaben is allowed at 0.4% (EU: banned entirely). Neither system is universally stricter; they made different decisions based on the same safety data. This is why multi-country compliance checking is essential for brands selling internationally."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How often do Korean cosmetic regulations change?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MFDS typically updates its cosmetic ingredient regulations several times per year. The K-Beauty API monitors source data weekly using automated compliance checking, and the database is updated whenever MFDS publishes changes. EU CosIng data is also monitored weekly for Annex II through VI changes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What concentration limits apply to retinol in Korea?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Retinol (INCI: Retinol, CAS: 11103-57-4) is classified as Restricted in Korea. It is regulated as a functional cosmetic active ingredient. Specific concentration limits depend on the product type and functional cosmetic category. The full regulatory details can be queried via the API using the ingredient code."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many countries does the API cover?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The K-Beauty Cosmetic Ingredients API covers regulatory data from 10 countries and regions: Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, and USA. The database contains 30,960 regulation records across these markets, allowing you to compare how the same ingredient is regulated in different countries with a single API call."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        :root { --ink: #1a1a2e; --paper: #fafaf8; --accent: #2d6a4f; --muted: #6b7280; --border: #e5e5e0; --code-bg: #f3f3ee; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', serif; color: var(--ink); background: var(--paper); line-height: 1.7; max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 1.8rem; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+        .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 30px; }
+        h2 { font-size: 1.1rem; margin: 28px 0 8px; color: var(--accent); }
+        p { margin-bottom: 16px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-size: 0.88rem; font-family: 'Consolas', monospace; }
+        .faq-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .faq-item:last-child { border-bottom: none; }
+        nav { margin-bottom: 30px; font-size: 0.9rem; }
+        nav a { margin-right: 16px; }
+        footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="./">Home</a>
+    <a href="./regulations/salicylic-acid.html">Salicylic Acid</a>
+    <a href="./regulations/parabens.html">Parabens</a>
+    <a href="./regulations/country-regulations.html">By Country</a>
+    <a href="./k-beauty-regulations-vs-eu-cosmetics.html">Korea vs EU</a>
+</nav>
+
+<h1>Frequently Asked Questions</h1>
+<p class="subtitle">Common questions about Korean cosmetic ingredient regulations and the K-Beauty API.</p>
+
+<div class="faq-item">
+    <h2>What cosmetic ingredients are banned in Korea?</h2>
+    <p>Korea's MFDS (Ministry of Food and Drug Safety) prohibits 172+ cosmetic ingredients. These include substances classified as dangerous or insufficiently tested for cosmetic use. The full list can be queried via the API using <code>/v1/ingredient/status?s=Prohibited</code>.</p>
+</div>
+
+<div class="faq-item">
+    <h2>How do I check if an ingredient is allowed in Korean cosmetics?</h2>
+    <p>Search by INCI name, CAS number, or Korean name using the API. Each ingredient returns a <code>regulation_status</code> field showing whether it is Prohibited, Restricted, or Not Listed. For restricted ingredients, concentration limits and product-type conditions are also provided.</p>
+</div>
+
+<div class="faq-item">
+    <h2>What is the difference between MFDS and KCIA?</h2>
+    <p>MFDS is the Korean government regulatory agency that sets and enforces cosmetic ingredient regulations. KCIA (Korea Cosmetic Industry Association) maintains the cosmetic ingredient dictionary — the master list of 21,796 ingredients with INCI names, CAS numbers, and safety classifications. The <a href="./">K-Beauty API</a> combines data from both sources.</p>
+</div>
+
+<div class="faq-item">
+    <h2>How do Korean cosmetic regulations compare to EU?</h2>
+    <p>Korea and the EU share a similar regulatory framework but differ in specific ingredient decisions. The EU bans 1,700+ substances compared to Korea's 172+. However, Korea has stricter age restrictions for some ingredients — <a href="./regulations/salicylic-acid.html">Salicylic Acid</a> is prohibited for children under 13 in Korea versus under 3 in the EU. Some ingredients like <a href="./regulations/parabens.html">Isobutylparaben</a> are banned in the EU but allowed in Korea. See our <a href="./k-beauty-regulations-vs-eu-cosmetics.html">detailed comparison</a>.</p>
+</div>
+
+<div class="faq-item">
+    <h2>What is an INCI name and how do I search by it?</h2>
+    <p>INCI (International Nomenclature of Cosmetic Ingredients) is the standardized naming system used worldwide. For example, "Retinol" is the INCI name for Vitamin A. Search the API using <code>GET /v1/ingredient/inci?q=retinol</code>.</p>
+</div>
+
+<div class="faq-item">
+    <h2>Are Korean cosmetic regulations stricter than EU?</h2>
+    <p>It depends on the ingredient. Korea is stricter for some — <a href="./regulations/salicylic-acid.html">Salicylic Acid</a> has an under-13 age restriction (EU: under 3). Korea is more permissive for others — <a href="./regulations/parabens.html">Isobutylparaben</a> is allowed at 0.4% (EU: banned entirely). Neither system is universally stricter. This is why multi-country compliance checking matters.</p>
+</div>
+
+<div class="faq-item">
+    <h2>How often do Korean cosmetic regulations change?</h2>
+    <p>MFDS typically updates its cosmetic ingredient regulations several times per year. The API monitors source data weekly using automated compliance checking, and the database is updated whenever MFDS or EU CosIng publishes changes.</p>
+</div>
+
+<div class="faq-item">
+    <h2>What concentration limits apply to retinol in Korea?</h2>
+    <p>Retinol (CAS: 11103-57-4) is classified as Restricted in Korea and regulated as a functional cosmetic active ingredient. Specific concentration limits depend on the product type. Query the API for full regulatory details.</p>
+</div>
+
+<div class="faq-item">
+    <h2>How many countries does the API cover?</h2>
+    <p>The API covers 10 countries and regions: Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, and USA. The database contains 30,960 regulation records, allowing you to compare how the same ingredient is regulated across markets with a single call. See the <a href="./regulations/country-regulations.html">country-by-country breakdown</a>.</p>
+</div>
+
+<footer>
+    <p style="font-size:0.8rem;color:#999;margin-bottom:8px;">Regulatory reference data only. Does not constitute legal, compliance, or safety advice. Verify with official sources before making compliance decisions.</p>
+    <p>K-Beauty Cosmetic Ingredients API — Data from MFDS and KCIA</p>
+    <p><a href="https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients">RapidAPI</a> · <a href="https://github.com/han-tagg/Korean-cosmetic-ingredients-api">GitHub</a> · <a href="./faq.html">FAQ</a></p>
+</footer>
+
+</body>
+</html>

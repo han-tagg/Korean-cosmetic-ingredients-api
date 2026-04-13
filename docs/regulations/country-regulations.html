@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmetic Ingredient Regulations by Country — 10-Country Database</title>
+    <meta name="description" content="Compare cosmetic ingredient regulations across 10 countries: Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, USA. 30,960 regulation records covering prohibited and restricted substances.">
+    <meta name="keywords" content="cosmetic regulations by country, EU cosmetic regulation, China cosmetic regulation, Japan cosmetic ingredients, ASEAN cosmetic directive, cosmetic compliance database, global cosmetic regulation comparison">
+    <link rel="canonical" href="https://han-tagg.github.io/kbeauty-api/regulations/country-regulations.html">
+
+    <meta property="og:title" content="Cosmetic Ingredient Regulations by Country">
+    <meta property="og:description" content="30,960 regulation records across 10 countries. Compare how the same ingredient is regulated in different markets.">
+    <meta property="og:type" content="article">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Global Cosmetic Ingredient Regulation Database",
+        "description": "Regulatory compliance data for cosmetic ingredients across 10 countries, including prohibited substances, restricted substances with concentration limits, and product-type restrictions.",
+        "url": "https://han-tagg.github.io/kbeauty-api/regulations/country-regulations.html",
+        "keywords": ["cosmetic regulation", "prohibited ingredients", "restricted ingredients", "concentration limits"],
+        "spatialCoverage": "Korea, EU, China, Japan, ASEAN, Canada, Brazil, Argentina, Taiwan, USA",
+        "creator": {"@type": "Organization", "name": "TAGG"}
+    }
+    </script>
+
+    <style>
+        :root { --ink: #1a1a2e; --paper: #fafaf8; --accent: #2d6a4f; --muted: #6b7280; --border: #e5e5e0; --code-bg: #f3f3ee; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', serif; color: var(--ink); background: var(--paper); line-height: 1.7; max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 1.8rem; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+        .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 30px; }
+        h2 { font-size: 1.2rem; margin: 30px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+        h3 { font-size: 1.05rem; margin: 20px 0 8px; }
+        p { margin-bottom: 16px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
+        th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { font-weight: bold; background: var(--code-bg); }
+        nav { margin-bottom: 30px; font-size: 0.9rem; }
+        nav a { margin-right: 16px; }
+        footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+        .cta { background: var(--code-bg); padding: 20px; border-radius: 6px; margin: 24px 0; }
+        .country-section { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../">← Home</a>
+    <a href="../k-beauty-regulations-vs-eu-cosmetics.html">Korea vs EU</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="parabens.html">Parabens</a>
+</nav>
+
+<h1>Cosmetic Ingredient Regulations by Country</h1>
+<p class="meta">10 countries · 30,960 regulation records · Updated April 2026</p>
+
+<p>The same cosmetic ingredient can be prohibited in one country, restricted in another, and completely unregulated in a third. This page breaks down what regulatory data is available for each of the 10 countries covered by the K-Beauty Cosmetic Ingredients API.</p>
+
+<h2>Coverage Overview</h2>
+<table>
+    <tr><th>Country / Region</th><th>Regulatory Agency</th><th>Data Types</th></tr>
+    <tr><td>🇰🇷 Korea</td><td>MFDS (식약처)</td><td>Full ingredient DB (21,796) + prohibited + restricted + concentration limits</td></tr>
+    <tr><td>🇪🇺 EU</td><td>European Commission / SCCS</td><td>Annex II (prohibited) + Annex III (restricted) + concentration limits + product-type restrictions + labeling requirements</td></tr>
+    <tr><td>🇨🇳 China</td><td>NMPA</td><td>Prohibited + restricted + concentration limits</td></tr>
+    <tr><td>🇯🇵 Japan</td><td>MHLW (厚生労働省)</td><td>Restricted substances + concentration limits per 100g</td></tr>
+    <tr><td>🌏 ASEAN</td><td>ASEAN Cosmetic Directive</td><td>Prohibited + restricted (10 member states, with some national exceptions)</td></tr>
+    <tr><td>🇨🇦 Canada</td><td>Health Canada</td><td>Cosmetic Ingredient Hotlist + concentration limits + purity requirements</td></tr>
+    <tr><td>🇧🇷 Brazil</td><td>ANVISA</td><td>Prohibited + restricted + concentration limits</td></tr>
+    <tr><td>🇦🇷 Argentina</td><td>ANMAT</td><td>Prohibited + restricted + concentration limits</td></tr>
+    <tr><td>🇹🇼 Taiwan</td><td>TFDA</td><td>Restricted substances + preservative limits (follows strictest of EU/US/Japan)</td></tr>
+    <tr><td>🇺🇸 USA</td><td>FDA</td><td>Federal regulations + state-level bans (e.g., California)</td></tr>
+</table>
+
+<h2>Country Highlights</h2>
+
+<div class="country-section">
+<h3>🇰🇷 Korea — The Base Dataset</h3>
+<p>Korea is the foundation of this API. The KCIA dictionary contains 21,796 cosmetic ingredients with Korean names, INCI names, CAS numbers, purposes, and MFDS regulatory classifications. Every ingredient has a <code>regulation_status</code> field: Prohibited (172+), Restricted (1,046+), or Not Listed (20,000+). For restricted ingredients, Korean-specific concentration limits and product-type conditions are provided in full.</p>
+</div>
+
+<div class="country-section">
+<h3>🇪🇺 EU — The Most Comprehensive Regulation</h3>
+<p>The EU Cosmetics Regulation (EC 1223/2009) is the most detailed regulatory framework in the database. It includes Annex II (1,700+ prohibited), Annex III (300+ restricted with conditions), plus allergen labeling requirements for 80+ fragrance allergens (expanded from 26 in 2023). EU data includes product-type restrictions, maximum concentrations, age restrictions, and required warning labels. See <a href="../k-beauty-regulations-vs-eu-cosmetics.html">Korea vs EU comparison</a>.</p>
+</div>
+
+<div class="country-section">
+<h3>🇨🇳 China — Growing Regulation</h3>
+<p>China's NMPA has been rapidly expanding its cosmetic ingredient regulations, increasingly aligning with international standards while maintaining its own prohibited and restricted substance lists. Chinese data includes concentration limits and product-type restrictions, with both the Chinese original and English translations.</p>
+</div>
+
+<div class="country-section">
+<h3>🇯🇵 Japan — Unique Concentration System</h3>
+<p>Japan uses a distinctive regulation approach: limits are expressed as "grams per 100g of product" rather than percentages. Japan's limits can be surprisingly different — <a href="salicylic-acid.html">Salicylic Acid is limited to 0.2%</a> in Japan while most countries allow 2-3%. Japan also has no specific age restrictions for many ingredients that other countries restrict for children.</p>
+</div>
+
+<div class="country-section">
+<h3>🌏 ASEAN — 10 Countries, Mostly Aligned</h3>
+<p>The ASEAN Cosmetic Directive creates a common framework for 10 Southeast Asian nations. Regulation is largely aligned with the EU but with some national exceptions — for example, Indonesia has separate rules for certain preservatives. The API captures both the common ASEAN rules and noted exceptions.</p>
+</div>
+
+<div class="country-section">
+<h3>🇨🇦 Canada — Unique Purity Requirements</h3>
+<p>Canada's Cosmetic Ingredient Hotlist includes concentration limits and unique requirements not found elsewhere. For example, <a href="salicylic-acid.html">Glycerin requires pharmaceutical-grade purity</a> for diethylene glycol impurities in oral and leave-on products — a manufacturing quality control requirement unique to Canada. <a href="triclosan.html">Triclosan</a> has dioxin impurity testing requirements.</p>
+</div>
+
+<div class="country-section">
+<h3>🇧🇷 Brazil & 🇦🇷 Argentina — Following the EU Lead</h3>
+<p>Brazil (ANVISA) and Argentina (ANMAT) tend to align with EU regulatory decisions, often with similar concentration limits and prohibited substance lists. When the EU reduced Propylparaben limits from 0.4% to 0.14%, both countries followed suit. When the EU banned <a href="parabens.html">Isobutylparaben</a>, both countries did the same.</p>
+</div>
+
+<div class="country-section">
+<h3>🇹🇼 Taiwan — The "Strictest Standard" Approach</h3>
+<p>Taiwan's TFDA has a unique regulatory philosophy: when EU, US, and Japan standards differ, Taiwan adopts the strictest among them. This is explicitly stated in their regulations. For preservatives, if the EU limit is 0.14% and Japan's is 0.2%, Taiwan will apply 0.14%.</p>
+</div>
+
+<h2>How the Same Ingredient Differs Across Countries</h2>
+<p>These articles demonstrate the regulatory fragmentation with real examples from the database:</p>
+<table>
+    <tr><th>Ingredient</th><th>Key Difference</th></tr>
+    <tr><td><a href="salicylic-acid.html">Salicylic Acid</a></td><td>Japan 0.2% vs Korea 2-3%; age restriction under 13 (Korea) vs under 3 (EU)</td></tr>
+    <tr><td><a href="parabens.html">Parabens</a></td><td>Isobutylparaben banned in 5+ countries, allowed in Korea/Japan</td></tr>
+    <tr><td><a href="triclosan.html">Triclosan</a></td><td>Every country allows different product types at 0.3%</td></tr>
+    <tr><td><a href="linalool.html">Linalool</a></td><td>Only the EU requires allergen labeling; others don't regulate it</td></tr>
+</table>
+
+<h2>API Access by Tier</h2>
+<table>
+    <tr><th>Tier</th><th>Countries Available</th><th>Price</th></tr>
+    <tr><td>BASIC</td><td>Ingredient data only (no regulations)</td><td>Free</td></tr>
+    <tr><td>PRO</td><td>Korea + EU</td><td>$29/mo</td></tr>
+    <tr><td>ULTRA</td><td>All 10 countries</td><td>$79/mo</td></tr>
+    <tr><td>MEGA</td><td>All 10 countries + detailed conditions</td><td>$199/mo</td></tr>
+</table>
+
+<div class="cta">
+    <p>Query any ingredient against all 10 countries with a single API call: <a href="https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients">K-Beauty Cosmetic Ingredients API</a>.</p>
+</div>
+
+<footer>
+    <p style="font-size:0.8rem;color:#999;margin-bottom:8px;">Regulatory reference data only. Does not constitute legal, compliance, or safety advice. Verify with official sources before making compliance decisions.</p>
+    <p>K-Beauty Cosmetic Ingredients API — Data from MFDS and KCIA</p>
+    <p><a href="https://rapidapi.com/han8212/api/k-beauty-cosmetic-ingredients">RapidAPI</a> · <a href="https://github.com/han-tagg/Korean-cosmetic-ingredients-api">GitHub</a> · <a href="../faq.html">FAQ</a></p>
+</footer>
+
+</body>
+</html>

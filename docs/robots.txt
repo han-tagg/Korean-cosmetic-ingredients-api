@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://han-tagg.github.io/kbeauty-api/sitemap.xml
