@@ -265,7 +265,7 @@ curl "https://k-beauty-cosmetic-ingredients.p.rapidapi.com/v1/ingredient/9/regul
 
 | Feature | BASIC (Free) | PRO ($29/mo) | ULTRA ($79/mo) | MEGA ($199/mo) |
 |---------|--------------|--------------|----------------|----------------|
-| **Monthly Requests** | 100 | 2,000 | 5,000 | 15,000 |
+| **Monthly Requests** | 300 | 10,000 | 25,000 | 80,000 |
 | **Results per Request** | 10 | 30 | 50 | 50 |
 | **Exact Search** | ✅ | ✅ | ✅ | ✅ |
 | **Partial Search** | ❌ | ✅ | ✅ | ✅ |
