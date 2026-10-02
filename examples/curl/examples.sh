@@ -156,7 +156,7 @@ echo ""
 
 
 # ============================================================
-# Example 9: Get Ingredient Regulations (PRO/ULTRA/MEGA only)
+# Example 9: Get Ingredient Regulations (PRO/ULTRA/MEGA; BASIC returns market count only)
 # ============================================================
 
 echo "🌍 Get Regulations for Linalool - All countries (PRO/ULTRA/MEGA only)"

@@ -245,11 +245,11 @@ def health_check():
 def get_regulations(code: int, country: str = None):
     """
     Get country-specific regulation data for an ingredient.
-    Requires PRO, ULTRA, or MEGA tier.
+    BASIC returns only the number of regulated markets. Market names and entries require PRO or higher.
     
     Country access by tier:
-        PRO:   한국, EU
-        ULTRA: + 중국, 미국, 일본, 아세안
+        PRO:   한국, EU, 중국, 미국, 일본, 아세안 (300 unique ingredients/month)
+        ULTRA: same 6 countries, no ingredient limit
         MEGA:  All 10 countries
     
     Args:

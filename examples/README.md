@@ -68,7 +68,7 @@ Each example file demonstrates:
 | Status List | List by regulatory status | All |
 | Partial Search | Contains text search | PRO/ULTRA/MEGA |
 | Get Ingredient | Get single ingredient details | All |
-| Get Regulations | Country-specific regulation data | PRO/ULTRA/MEGA |
+| Get Regulations | Country-specific regulation data | PRO/ULTRA/MEGA (BASIC: market count) |
 
 ## 📝 License
 

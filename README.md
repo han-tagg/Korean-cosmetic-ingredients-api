@@ -240,7 +240,7 @@ curl "https://k-beauty-cosmetic-ingredients.p.rapidapi.com/v1/ingredient/9/regul
 | `/v1/ingredient/search?q=&field=` | GET | Partial text search (contains) | PRO+ |
 | `/v1/ingredient/status?s=&page=` | GET | List by regulatory status | All |
 | `/v1/ingredient/{code}` | GET | Get single ingredient by code | All |
-| `/v1/ingredient/{code}/regulations` | GET | Get country-specific regulations | PRO+ |
+| `/v1/ingredient/{code}/regulations` | GET | Get country-specific regulations | PRO+ (BASIC: market count) |
 
 ### Utility Endpoints
 
@@ -271,7 +271,7 @@ curl "https://k-beauty-cosmetic-ingredients.p.rapidapi.com/v1/ingredient/9/regul
 | **Partial Search** | ❌ | ✅ | ✅ | ✅ |
 | **Core Fields** | ✅ | ✅ | ✅ | ✅ |
 | **Restriction Limits** | ❌ | ✅ | ✅ | ✅ |
-| **Regulation Countries** | ❌ | 🇰🇷🇪🇺 (2) | +🇨🇳🇺🇸🇯🇵 ASEAN (6) | All 10 |
+| **Regulation Countries** | Market count only | KR, EU, CN, US, JP, ASEAN (6), 300 ingredients/mo | Same 6, no ingredient limit | All 10 |
 | **Detailed Conditions** | ❌ | ❌ | ✅ | ✅ |
 | **Regulatory Notes** | ❌ | ❌ | ✅ | ✅ |
 | **Origin Definitions** | ❌ | ❌ | ✅ | ✅ |
